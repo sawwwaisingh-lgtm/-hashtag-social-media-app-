@@ -1,0 +1,25 @@
+workflows:
+  android-workflow:
+    name: HashtagStation Android APK
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Build APK
+        script: |
+          flutter build apk --release --no-obfuscate
+    artifacts:
+      - build/**/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - sawwwaisingh@okhdfcbank.com
+        notify:
+          success: true
+          failure: true
