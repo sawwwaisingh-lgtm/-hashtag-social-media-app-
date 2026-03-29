@@ -1,3 +1,4 @@
+
 workflows:
   android-workflow:
     name: HashtagStation Android APK
@@ -5,12 +6,9 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Set up local.properties
-        script: |
-          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         script: |
-          flutter packages pub get
+          flutter pub get
       - name: Build APK
         script: |
           flutter build apk --release --no-obfuscate
@@ -19,7 +17,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - sawwwaisingh@okhdfcbank.com
+          - sawwwaisingh@gmail.com
         notify:
           success: true
           failure: true
