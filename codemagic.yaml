@@ -6,6 +6,9 @@ workflows:
       flutter: 3.19.6
       java: 17
     scripts:
+      - name: Set Flutter SDK path
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         script: |
           flutter clean
