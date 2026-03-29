@@ -1,35 +1,23 @@
-
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sawaisingh.hashtagstation">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <application
-        android:label="HashtagStation"
-        android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:theme="@style/LaunchTheme"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
-        </activity>
-
-        <!-- Flutter V2 embedding required meta -->
-        <meta-data
-            android:name="io.flutter.embedding.android.NormalTheme"
-            android:resource="@style/NormalTheme" />
-
-    </application>
-
-</manifest>
+workflows:
+  android-workflow:
+    name: HashtagStation Android APK
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter clean
+          flutter pub get
+      - name: Build APK
+        script: |
+          flutter build apk --release --no-obfuscate
+    artifacts:
+      - build/**/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - sawwwaisingh@gmail.com
+        notify:
+          success: true
+          failure: true
